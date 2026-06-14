@@ -24,15 +24,6 @@ pnpm dev
 
 Ouvrir [http://localhost:3000](http://localhost:3000).
 
-### Variables d'environnement
-
-À placer dans `.env.local` (jamais commité) — valeurs dans Supabase → Project Settings → API :
-
-```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-```
-
 ## Scripts
 
 - `pnpm dev` — serveur de développement
