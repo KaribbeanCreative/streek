@@ -60,7 +60,9 @@ export function TaskItem({ task }: { task: Task }) {
   }
 
   return (
-    <li className="flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5">
+    // Mobile : 2 rangées (titre+actions, puis méta). À partir de sm: tout
+    // revient sur une seule ligne (flex-wrap + ordre/largeur de la méta).
+    <li className="flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-lg border border-border bg-card px-3 py-2.5">
       <Checkbox
         checked={task.completed}
         onCheckedChange={handleToggle}
@@ -81,13 +83,13 @@ export function TaskItem({ task }: { task: Task }) {
               setDraftTitle(task.title);
             }
           }}
-          className="h-8 flex-1"
+          className="h-8 min-w-0 flex-1"
         />
       ) : (
         <span
           onDoubleClick={() => setIsEditing(true)}
           className={cn(
-            "flex-1 truncate text-sm",
+            "min-w-0 flex-1 truncate text-sm",
             task.completed && "text-muted-foreground line-through",
           )}
         >
@@ -95,13 +97,17 @@ export function TaskItem({ task }: { task: Task }) {
         </span>
       )}
 
-      <PriorityBadge priority={task.priority} />
+      {/* Méta : sous le titre sur mobile (order-last + largeur pleine),
+          réintégrée dans la ligne à partir de sm:. */}
+      <div className="order-last flex w-full items-center gap-3 pl-8 sm:order-none sm:w-auto sm:pl-0">
+        <PriorityBadge priority={task.priority} />
 
-      {task.due_date && (
-        <span className="shrink-0 text-xs text-muted-foreground">
-          {formatDueDate(task.due_date)}
-        </span>
-      )}
+        {task.due_date && (
+          <span className="shrink-0 text-xs text-muted-foreground">
+            {formatDueDate(task.due_date)}
+          </span>
+        )}
+      </div>
 
       {isEditing ? (
         <>
