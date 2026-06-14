@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/components/auth/logout-button";
+import { Button } from "@/components/ui/button";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -19,7 +21,10 @@ export default async function DashboardPage() {
           Connecté en tant que <span className="text-foreground">{user.email}</span>
         </p>
       </div>
-      <LogoutButton />
+      <div className="flex flex-col items-center gap-3">
+        <Button render={<Link href="/tasks" />}>Mes tâches</Button>
+        <LogoutButton />
+      </div>
     </main>
   );
 }
