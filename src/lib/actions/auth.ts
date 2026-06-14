@@ -42,10 +42,11 @@ export async function register(
   if (error) return { error: error.message };
 
   // « Confirm email » activé côté Supabase : pas de session immédiate.
+  // Le lien reçu par mail passe par /auth/confirm et connecte directement.
   if (!data.session) {
     return {
       notice:
-        "Compte créé ! Vérifie ta boîte mail pour confirmer ton adresse, puis connecte-toi.",
+        "Compte créé ! Clique sur le lien dans l'email de confirmation pour accéder à ton tableau de bord.",
     };
   }
 
