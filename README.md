@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Streek
 
-## Getting Started
+Application web de suivi de vie (habitudes, tâches, objectifs), destinée à de vrais utilisateurs.
 
-First, run the development server:
+🔗 **En ligne :** https://streek.karibbeancreative.xyz
+
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript** (strict)
+- **Tailwind CSS** + **Shadcn UI**
+- **Supabase** (PostgreSQL + Auth, avec RLS)
+- **Zustand** pour l'état client
+- **Resend** pour l'envoi d'emails (SMTP)
+- Hébergement : **Vercel** · DNS : **Cloudflare**
+- Node.js 20+ requis
+
+## Installation locale
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local   # puis renseigner les clés Supabase
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+À placer dans `.env.local` (jamais commité) — valeurs dans Supabase → Project Settings → API :
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `pnpm dev` — serveur de développement
+- `pnpm build` — build de production (doit passer avant tout merge)
+- `pnpm lint` — ESLint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Base de données
 
-## Deploy on Vercel
+Les migrations SQL sont dans `supabase/migrations/`, à exécuter dans le SQL Editor du dashboard Supabase. Chaque table active la Row Level Security pour isoler les données par utilisateur.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Déploiement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Vercel** : auto-déploiement à chaque push sur `main`. Les variables d'environnement Supabase sont configurées côté projet Vercel.
+- **Domaine** : `streek.karibbeancreative.xyz`, CNAME vers Vercel géré dans Cloudflare (DNS only).
+- **Auth email** : confirmation d'inscription activée. Les emails partent via Resend (SMTP custom dans Supabase), depuis le domaine vérifié `karibbeancreative.xyz`. Le lien de confirmation passe par la route `/auth/confirm`.
+
+Le workflow Git, les conventions de code et le périmètre fonctionnel sont décrits dans [`CLAUDE.md`](./CLAUDE.md).
+
+## Journal
+
+### 2026-06-14 — v1 initiale et mise en ligne
+
+- Bootstrap du projet (Next.js 16, Tailwind v4, Shadcn UI).
+- Clients Supabase SSR + proxy de session.
+- Authentification email/mot de passe (login, register, dashboard protégé, logout).
+- Module **Tâches** : CRUD, priorités, échéances, responsive mobile.
+- Connexion automatique via le lien de confirmation email (route `/auth/confirm`).
+- **Mise en production** : déploiement Vercel, domaine custom `streek.karibbeancreative.xyz`, confirmation email branchée sur Resend. Application ouverte aux tests utilisateurs.
