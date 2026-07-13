@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { FlameIcon } from "@/shared/icons";
+import { Button } from "@/shared/ui/button";
 import { ThemeToggle } from "@/shared/ui/theme-toggle";
 
 export default function HomePage() {
@@ -22,6 +24,9 @@ export default function HomePage() {
         <p className="max-w-md text-lg text-muted-foreground">
           Track your habits, tasks and goals. Streek v1 is under construction.
         </p>
+        <Button asChild className="mt-2 h-12 px-8">
+          <Link href="/habits">Get started</Link>
+        </Button>
       </main>
     </div>
   );
