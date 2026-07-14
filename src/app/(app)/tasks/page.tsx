@@ -1,13 +1,17 @@
-import { SquareCheckIcon } from "@/shared/icons";
+import {
+  QuickAddTask,
+  TaskSectionList,
+  getTaskSections,
+} from "@/features/tasks";
 
-export default function TasksPage() {
+export default async function TasksPage() {
+  const sections = await getTaskSections();
+
   return (
-    <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-16 text-center">
-      <SquareCheckIcon className="size-8 text-muted-foreground" />
-      <p className="font-medium">To-Do is coming soon</p>
-      <p className="text-sm text-muted-foreground">
-        Capture one-off tasks and knock them out.
-      </p>
+    <div className="flex flex-col gap-6">
+      <h1 className="text-2xl font-bold">To-Do</h1>
+      <QuickAddTask />
+      <TaskSectionList sections={sections} />
     </div>
   );
 }
