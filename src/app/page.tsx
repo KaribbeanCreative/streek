@@ -25,7 +25,7 @@ export default function HomePage() {
           Track your habits, tasks and goals. Streek v1 is under construction.
         </p>
         <Button asChild className="mt-2 h-12 px-8">
-          <Link href="/habits">Get started</Link>
+          <Link href="/dashboard">Get started</Link>
         </Button>
       </main>
     </div>

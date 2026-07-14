@@ -10,4 +10,5 @@ export {
   type HabitStreakResult,
 } from "./rules";
 export { trackEvent, untrackEvent } from "./actions/track-event";
+export { getUserStats } from "./actions/get-user-stats";
 export type { UserStats } from "./types";

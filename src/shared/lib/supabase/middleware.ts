@@ -47,7 +47,7 @@ export async function updateSession(request: NextRequest) {
 
   if (user && pathname.startsWith("/login")) {
     const url = request.nextUrl.clone();
-    url.pathname = "/habits";
+    url.pathname = "/dashboard";
     const redirect = NextResponse.redirect(url);
     supabaseResponse.cookies
       .getAll()
