@@ -11,4 +11,5 @@ export {
 } from "./rules";
 export { trackEvent, untrackEvent } from "./actions/track-event";
 export { getUserStats } from "./actions/get-user-stats";
+export { StreakHero } from "./components/streak-hero";
 export type { UserStats } from "./types";
