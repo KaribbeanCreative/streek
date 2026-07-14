@@ -42,7 +42,7 @@ export default async function HabitsPage() {
       <Link
         href="/habits/new"
         aria-label="New habit"
-        className="fixed bottom-6 right-6 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-colors hover:bg-primary-hover active:scale-95"
+        className="fixed bottom-24 right-6 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-colors hover:bg-primary-hover active:scale-95"
       >
         <PlusIcon className="size-6" />
       </Link>
