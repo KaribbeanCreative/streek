@@ -39,7 +39,7 @@ export function QuickAddTask() {
           size="icon"
           aria-label="Add task"
           disabled={isPending || title.trim().length === 0}
-          className="size-12 shrink-0"
+          className="size-12 shrink-0 rounded-full"
         >
           <PlusIcon className="size-5" />
         </Button>
