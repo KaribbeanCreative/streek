@@ -2,7 +2,7 @@ import { FlameIcon, SnowflakeIcon, TrophyIcon } from "@/shared/icons";
 import { addDays, weekdayIndex } from "@/shared/lib/dates";
 import { WEEKDAYS } from "@/shared/constants";
 
-const INK = "oklch(24% 0.02 50)";
+const INK = "oklch(98.5% 0.005 85)";
 
 type StreakHeroProps = {
   current: number;
@@ -58,7 +58,9 @@ export function StreakHero({
             <span
               className="h-2 w-full rounded-full"
               style={{
-                backgroundColor: day.checked ? INK : "oklch(24% 0.02 50 / 18%)",
+                backgroundColor: day.checked
+                  ? INK
+                  : "oklch(98.5% 0.005 85 / 30%)",
                 outline: day.isToday ? `1.5px solid ${INK}` : undefined,
                 outlineOffset: day.isToday ? "2px" : undefined,
               }}
